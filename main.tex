@@ -1,0 +1,48 @@
+\documentclass[12pt]{default}
+% \invert
+
+\renewcommand{\am}[1]{\todohelp{Antonio}{\color{magenta}\bf}{#1}}
+\newcommand{\alice}[1]{\todohelp{Alice}{\color{yellow}\bf}{#1}}
+\newcommand{\bob}[1]{\todohelp{Bob}{\color{blue}\bf}{#1}}
+
+\title{Historical Optimization with Applications to Dynamic Higher Edge Connectivity}
+\author{
+    Alice Doe\\
+    B University
+    \texttt{ad@b.edu}
+    \and
+    Bob Dover\\
+    A University\\
+    \texttt{bd@a.edu}
+}
+\date{April 1, 2020}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\todo{Write abstract}
+\end{abstract}
+
+\pagenumbering{gobble}
+\clearpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+This problem is really cool~\cite{MolinaLovetS19}.
+% \input{other-file}
+
+\section*{Acknowledgements}
+Thanks.
+
+\clearpage
+\bibliography{ref}
+
+\clearpage
+\appendix
+
+\section{Omitted Proofs}
+We forget to prove RH! \todo{qq} foo
+% \input{omitted}
+
+\end{document}
