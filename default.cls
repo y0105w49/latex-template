@@ -51,6 +51,7 @@
     \crefname{lem}{Lemma}{Lemmas}
 \newtheorem{conj}[thm]{Conjecture}
 \newtheorem{fact}[thm]{Fact}
+\newtheorem{claim}[thm]{Claim}
 
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition}
