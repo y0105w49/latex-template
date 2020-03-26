@@ -160,6 +160,7 @@
 \DeclareMathOperator*{\amin}{arg\,min}
 \DeclareMathOperator*{\amax}{arg\,max}
 \DeclareMathOperator*{\Var}{Var}
+\DeclareMathOperator*{\Cov}{Cov}
 \DeclareMathOperator*{\E}{{\bb E}}
 
 \author{Antonio J. Molina Lovett}
