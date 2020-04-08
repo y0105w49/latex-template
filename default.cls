@@ -168,7 +168,7 @@
 \DeclareMathOperator*{\Cov}{Cov}
 \DeclareMathOperator*{\E}{\mathbf E}
 \undef{Pr}
-\DeclareMathOperator{\Pr}{\mathbf P}
+\DeclareMathOperator*{\Pr}{\mathbf P}
 \undef{H}
 \DeclareMathOperator{\H}{\mathbf H}
 
