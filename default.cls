@@ -38,6 +38,9 @@
 \allowdisplaybreaks
 
 \newcommand{\aliasenv}[2]{\newenvironment{#1}{\begin{#2}}{\end{#2}}}
+\newcommand{\undef}[1]{
+	\expandafter\let\csname#1\endcsname\relax
+}
 \newcommand{\undefthm}[1]{
     \expandafter\let\csname#1\endcsname\relax
     \expandafter\let\csname c@#1\endcsname\relax
@@ -81,12 +84,12 @@
 
 \newcommand{\lef}{\left}
 \newcommand{\rig}{\right}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
 \newcommand{\mc}{\mathcal}
 \newcommand{\mf}{\mathfrak}
 \newcommand{\mbf}{\mathbf}
@@ -147,6 +150,8 @@
 \newcommand{\mcl}{\mathclap}
 \newcommand{\sst}{\substack}
 \newcommand{\SST}[1]{\mcl{\sst{#1}}}
+\newcommand{\tri}{\triangle}
+\newcommand{\ones}{\mathbf1}
 
 \DeclarePairedDelimiter{\fl}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\cl}{\lceil}{\rceil}
@@ -161,6 +166,9 @@
 \DeclareMathOperator*{\amax}{arg\,max}
 \DeclareMathOperator*{\Var}{Var}
 \DeclareMathOperator*{\Cov}{Cov}
-\DeclareMathOperator*{\E}{{\bb E}}
+\DeclareMathOperator*{\E}{\mathbf E}
+\undef{H}
+
+\DeclareMathOperator{\H}{\mathbf H}
 
 \author{Antonio J. Molina Lovett}
