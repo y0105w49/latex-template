@@ -39,7 +39,7 @@
 
 \newcommand{\aliasenv}[2]{\newenvironment{#1}{\begin{#2}}{\end{#2}}}
 \newcommand{\undef}[1]{
-	\expandafter\let\csname#1\endcsname\relax
+    \expandafter\let\csname#1\endcsname\relax
 }
 \newcommand{\undefthm}[1]{
     \expandafter\let\csname#1\endcsname\relax
