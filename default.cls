@@ -145,6 +145,7 @@
 \newcommand{\dm}{\dotsm}
 \newcommand{\restr}{\restriction}
 \newcommand{\os}{\overset}
+\newcommand{\us}{\underset}
 \newcommand{\Sq}{\mathbin{\square}}
 \newcommand{\op}{\operatorname}
 \newcommand{\mcl}{\mathclap}
