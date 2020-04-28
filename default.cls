@@ -168,9 +168,7 @@
 \DeclareMathOperator*{\Var}{Var}
 \DeclareMathOperator*{\Cov}{Cov}
 \DeclareMathOperator*{\E}{\mathbf E}
-\undef{Pr}
-\DeclareMathOperator*{\Pr}{\mathbf P}
-\undef{H}
-\DeclareMathOperator{\H}{\mathbf H}
+\undef{Pr}\DeclareMathOperator*{\Pr}{\mathbf P}
+\undef{H}\DeclareMathOperator{\H}{\mathbf H}
 
 \author{Antonio J. Molina Lovett}
