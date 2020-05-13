@@ -7,9 +7,12 @@
 
 \usepackage{geometry}
 \geometry{margin=1in}
-\bibliographystyle{alpha}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[UKenglish]{babel}
+\usepackage{csquotes}
+\usepackage[style=alphabetic]{biblatex}
+
 \usepackage[dvipsnames]{xcolor}
 \newcommand{\invert}{\pagecolor{darkgray}\color{lightgray}}
 
@@ -38,9 +41,6 @@
 \allowdisplaybreaks
 
 \newcommand{\aliasenv}[2]{\newenvironment{#1}{\begin{#2}}{\end{#2}}}
-\newcommand{\undef}[1]{
-    \expandafter\let\csname#1\endcsname\relax
-}
 \newcommand{\undefthm}[1]{
     \expandafter\let\csname#1\endcsname\relax
     \expandafter\let\csname c@#1\endcsname\relax
@@ -168,7 +168,7 @@
 \DeclareMathOperator*{\Var}{Var}
 \DeclareMathOperator*{\Cov}{Cov}
 \DeclareMathOperator*{\E}{\mathbf E}
-\undef{Pr}\DeclareMathOperator*{\Pr}{\mathbf P}
-\undef{H}\DeclareMathOperator{\H}{\mathbf H}
+\undef{\Pr}\DeclareMathOperator*{\Pr}{\mathbf P}
+\undef{\H}\DeclareMathOperator{\H}{\mathbf H}
 
 \author{Antonio J. Molina Lovett}
