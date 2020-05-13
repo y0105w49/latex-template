@@ -12,6 +12,8 @@
 \usepackage[UKenglish]{babel}
 \usepackage{csquotes}
 \usepackage[style=alphabetic]{biblatex}
+\newcommand{\acite}{\autocite}
+\newcommand{\Acite}{\Autocite}
 
 \usepackage[dvipsnames]{xcolor}
 \newcommand{\invert}{\pagecolor{darkgray}\color{lightgray}}
