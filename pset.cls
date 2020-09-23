@@ -25,7 +25,7 @@
 \newtheoremstyle{problem}
     {}{}
     {}{}
-    {\bfseries}{.}
+    {\bfseries}{}
     { }
     {\thmname{#1}\@ifnotempty{#1}{ }\thmnumber{\@ifempty{#3}{#2}\@ifnotempty{#3}{#3}}}
 \theoremstyle{problem}
