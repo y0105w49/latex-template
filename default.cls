@@ -10,6 +10,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[UKenglish]{babel}
+\usepackage{fmtcount}
 \usepackage{csquotes}
 \usepackage[style=alphabetic]{biblatex}
 \newcommand{\acite}{\autocite}
@@ -27,8 +28,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{braket}
 \usepackage[ampersand]{easylist}
-\usepackage{enumerate}
+\usepackage[inline]{enumitem}
 \usepackage{fancybox}
+\usepackage{multicol}
 
 \usepackage{listings}
 \usepackage{algorithm}
@@ -155,6 +157,8 @@
 \newcommand{\SST}[1]{\mcl{\sst{#1}}}
 \newcommand{\tri}{\triangle}
 \newcommand{\ones}{\mathbf1}
+\newcommand{\lims}{\limits}
+\newcommand{\nlims}{\nolimits}
 
 \DeclarePairedDelimiter{\fl}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\cl}{\lceil}{\rceil}
@@ -164,6 +168,8 @@
 \DeclarePairedDelimiter{\pa}{(}{)}
 \DeclarePairedDelimiter{\sq}{[}{]}
 \DeclarePairedDelimiter{\cu}{\{}{\}}
+\DeclarePairedDelimiter{\clop}{[}{)}
+\DeclarePairedDelimiter{\opcl}{(}{]}
 
 \DeclareMathOperator*{\amin}{arg\,min}
 \DeclareMathOperator*{\amax}{arg\,max}
