@@ -1,24 +1,22 @@
 \documentclass[12pt]{default}
 % \invert
 
-\renewcommand{\am}[1]{\todohelp{Antonio}{\color{magenta}\bf}{#1}}
-\newcommand{\alice}[1]{\todohelp{Alice}{\color{yellow}\bf}{#1}}
-\newcommand{\bob}[1]{\todohelp{Bob}{\color{blue}\bf}{#1}}
+% \renewcommand{\am}[1]{\todohelp{Antonio}{\color{magenta}\bf}{#1}}
 
 \addbibresource{ref.bib}
 \addbibresource{~/Dropbox/papers/*.bib}
 \addbibresource{out.bib}
 
-\title{Historical Optimization with Applications to Dynamic Higher Edge Connectivity}
-\author{
-    Alice Doe\\
-    B University\\
-    \texttt{ad@b.edu}
-    \and
-    Bob Dover\\
-    A University\\
-    \texttt{bd@a.edu}
-}
+\title{Generic Title}
+% \author{
+%     Alice\\
+%     B University\\
+%     \texttt{a@b.edu}
+%     \and
+%     Bob\\
+%     A University\\
+%     \texttt{b@a.edu}
+% }
 \date{April 1, 2020}
 
 \begin{document}
@@ -33,11 +31,12 @@
 \pagenumbering{arabic}
 
 \section{Introduction}
-This problem is really cool~\acite{MolinaLovettS19:optim_regul_expres_permut}.
-% \input{other-file}
+Citing something to generate bibliography~\autocite{MolinaLovettS19:optim_regul_expres_permut}.
 
-\section*{Acknowledgements}
-Thanks.
+% \input{section2-file}
+
+% \section*{Acknowledgements}
+% Thanks.
 
 \clearpage
 \printbibliography
@@ -46,7 +45,9 @@ Thanks.
 \appendix
 
 \section{Omitted Proofs}
-We forget to prove RH! \todo{qq} foo
 % \input{omitted}
+We forgot to prove RH!
+
+\am{not sure how to show this}
 
 \end{document}

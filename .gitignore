@@ -9,3 +9,4 @@
 .auctex-auto
 *.bcf
 *.run.xml
+out.bib
