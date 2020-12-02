@@ -1,7 +1,6 @@
 \documentclass[12pt]{default}
-% \invert
 
-% \renewcommand{\am}[1]{\todohelp{Antonio}{\color{magenta}\bf}{#1}}
+% \editor[am]{AM}{Antonio}{magenta}
 
 \addbibresource{ref.bib}
 \addbibresource{~/Dropbox/papers/*.bib}
@@ -9,25 +8,26 @@
 
 \title{Generic Title}
 % \author{
-%     Alice\\
-%     B University\\
-%     \texttt{a@b.edu}
-%     \and
-%     Bob\\
-%     A University\\
-%     \texttt{b@a.edu}
+%   Alice\\
+%   B University\\
+%   \texttt{a@b.edu}
+%   \and
+%   Bob\\
+%   A University\\
+%   \texttt{b@a.edu}
 % }
 \date{April 1, 2020}
 
 \begin{document}
 \maketitle
+% \pagenumbering{roman}
+% \thispagestyle{empty}
 
 \begin{abstract}
-\todo{Write abstract}
+  \todo{Write abstract}
 \end{abstract}
 
-\pagenumbering{gobble}
-\clearpage
+% \clearpage
 \pagenumbering{arabic}
 
 \section{Introduction}
@@ -35,19 +35,15 @@ Citing something to generate bibliography~\autocite{MolinaLovettS19:optim_regul_
 
 % \input{section2-file}
 
-% \section*{Acknowledgements}
-% Thanks.
+% \clearpage
+\printbibliography{}
 
-\clearpage
-\printbibliography
-
-\clearpage
+% \clearpage
 \appendix
 
 \section{Omitted Proofs}
 % \input{omitted}
-We forgot to prove RH!
-
+We forgot to prove RH\@, prove RH\@!
 \am{not sure how to show this}
 
 \end{document}

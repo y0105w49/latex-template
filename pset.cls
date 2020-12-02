@@ -1,33 +1,31 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{pset}[2019/10/16 y0105w49 problem set]
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{default}}
-\ProcessOptions\relax
-\LoadClass{default}
+\LoadClassWithOptions{default}
 
 \def\@maketitle{
-    \newpage
-    \begingroup
-    \centering
-    \let\footnote\thanks
-    {\large\textbf{\@title}\par}
-    \vskip 0.5\baselineskip
-    \begin{tabular}[t]{c}
+  \newpage
+  \begingroup
+  \centering
+  \let\footnote\thanks
+  {\large\textbf{\@title}\par}
+  \vskip 0.5\baselineskip
+  \begin{tabular}[t]{c}
     \@author
-    \end{tabular}\par
-    \vskip0.5\baselineskip
-    \@date
-    \par
-    \endgroup
-    \vskip\baselineskip
+  \end{tabular}\par
+  \vskip0.5\baselineskip
+  \@date
+  \par
+  \endgroup
+  \vskip\baselineskip
 }
 
 \newtheoremstyle{problem}
-    {}{}
-    {}{}
-    {\bfseries}{}
-    { }
-    {\thmname{#1}\@ifnotempty{#1}{ }\thmnumber{\@ifempty{#3}{#2}\@ifnotempty{#3}{#3}}}
+  {}{}
+  {}{}
+  {\bfseries}{}
+  { }
+  {\thmname{#1}\@ifnotempty{#1}{ }\thmnumber{\@ifempty{#3}{#2}\@ifnotempty{#3}{#3}}}
 \theoremstyle{problem}
 \newtheorem{prob}{Problem}
 \newtheorem{bprob}[prob]{Extra Credit}
