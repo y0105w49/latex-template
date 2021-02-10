@@ -21,7 +21,7 @@
 \usepackage{csquotes}
 \usepackage[style=alphabetic]{biblatex}
 \usepackage{datetime2}
-\usepackage[margin=1in,head=15pt]{geometry}
+\usepackage[margin=1.25in,head=15pt]{geometry}
 \usepackage{fancyhdr}
 \usepackage{pageslts}
 \usepackage{setspace}
@@ -29,7 +29,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{amsmath,amsthm,amssymb,mathtools}
 
-\ifdraft\doublespacing\geometry{margin=1.5in}\fi
+\ifdraft\doublespacing\fi
 \AfterPreamble{\let\headtitle\@title}
 \ifdraft
   \pagestyle{fancy}
@@ -205,6 +205,9 @@
 \newcommand{\ones}{\mathbf1}
 \newcommand{\lims}{\limits}
 \newcommand{\nlims}{\nolimits}
+\newcommand{\co}{\colon}
+\newcommand{\na}{\nabla}
+\newcommand{\gr}{\nabla}
 
 \DeclarePairedDelimiter{\fl}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\cl}{\lceil}{\rceil}
