@@ -37,6 +37,7 @@
   \rhead{\DTMnow{} \theCurrentPage/\lastpageref*{LastPages}}
   \fancypagestyle{plain}{}
   \fancypagestyle{empty}{}
+  \AtEveryBibitem{{\scriptsize\color{gray}\url{file:///Users/antonio/Dropbox/papers/\thefield{entrykey}.pdf}\par}}
 \else
   \renewcommand{\headrulewidth}{0pt}
 \fi
@@ -52,12 +53,13 @@
 \hypersetup{final}
 \usepackage[capitalize,noabbrev]{cleveref}
 \newcommand{\creflastconjunction}{, and~}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
 
 \usepackage{tikz,tikz-cd}
 \usetikzlibrary{calc,quotes,matrix,automata,positioning}
 
 \usepackage{thm-restate}
-\usepackage[normalem]{ulem}
+% \usepackage[normalem]{ulem}
 \usepackage{braket}
 \usepackage[ampersand]{easylist}
 \usepackage[inline]{enumitem}
@@ -225,6 +227,7 @@
 \DeclareMathOperator*{\Var}{Var}
 \DeclareMathOperator*{\Cov}{Cov}
 \DeclareMathOperator*{\E}{\mathbf E}
+\DeclareMathOperator{\diag}{diag}
 \undef{\Pr}\DeclareMathOperator*{\Pr}{\mathbf P}
 \undef{\H}\DeclareMathOperator{\H}{\mathbf H}
 
