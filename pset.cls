@@ -39,8 +39,8 @@
 \newcommand{\closepp}{\endssprob\endsprob\endprob}
 
 \theoremstyle{plain}
-\undefthm{lem}
-\newtheorem{lem}{Lemma}[prob]
+\undefthm{lemma}
+\newtheorem{lemma}{Lemma}[prob]
 \renewcommand{\thelem}{\arabic{lem}}
 \newtheorem{case}{Case}[ssprob]
 \renewcommand{\thecase}{\arabic{case}}

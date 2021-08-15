@@ -1,0 +1,41 @@
+#+TITLE: Testing!
+#+SUBTITLE: Subtittttttle!
+#+AUTHOR: Test Author
+#+DATE: 2018-01-01
+
+#+OPTIONS: timestamp:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: reveal_single_file:nil
+#+BEAMER_HEADER: \PassOptionsToPackage{style=authoryear}{biblatex}
+#+BEAMER_HEADER: \NewDocumentEnvironment{notes}{+b}{\note{#1}}{}
+# #+BEAMER_HEADER: \setbeameroption{show notes}
+#+BEAMER_HEADER: \setbeameroption{show notes on second screen=right}
+# #+REVEAL_PLUGINS: (highlight)
+# #+REVEAL_THEME: white
+#+REVEAL_THEME: black
+# #+REVEAL_THEME: serif
+
+# https://blog.tecosaur.com/tmio/
+# use [cite/s/v:@foo]
+# s is t for text.  v is c for caps.  add b to v for cite/Cite (paper as obj).
+
+* foo
+** fbarrr
+*** subsub!
+#+begin_notes
+speaker notes are fun7;
+#+end_notes
+** fbarrr2
+# for $e^{iθ}=\cosθ+i\sinθ$
+for $e^{i\theta}=\cos\theta+i\sin\theta$
+#+begin_src cpp
+int32_t main() {
+    return 18000;
+}
+#+end_src
+* bar
+** qq
+this is content [cite:@EbtekarL21:elo_mmr;@SleatorT83:data_struc_dynam_trees;@ChenLBR20:beauc], woo!
+
+# ** bib
+# #+print_bibliography:

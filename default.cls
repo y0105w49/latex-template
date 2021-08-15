@@ -1,3 +1,6 @@
+% -*- TeX-master: "main"; -*-
+% !TEX root=main.tex
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{default}[2019/10/16 y0105w49 default]
 
@@ -6,7 +9,12 @@
 \newif\ifdraft\DeclareOption{draft}{\drafttrue}
 \newif\iffinal\DeclareOption{final}{\finaltrue}
 \newif\ifdarkmode\DeclareOption{darkmode}{\darkmodetrue}
+\newif\ifscreensize\DeclareOption{screensize}{\screensizetrue}
 \newif\ifebook\DeclareOption{ebook}{\ebooktrue}
+\newif\ifheader\DeclareOption{header}{\headertrue}
+\newif\iffullcites\DeclareOption{fullcites}{\fullcitestrue}
+\newif\ifsentencecase\DeclareOption{sentencecase}{\sentencecasetrue}
+\newif\ifsectionthms\DeclareOption{sectionthms}{\sectionthmstrue}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -19,41 +27,68 @@
 \usepackage{alphabeta}
 \usepackage{fmtcount}
 \usepackage{csquotes}
-\usepackage[style=alphabetic]{biblatex}
+\usepackage[style=alphabetic,alldates=year]{biblatex}
 \usepackage{datetime2}
-\usepackage[margin=1.25in,head=15pt]{geometry}
+\usepackage[margin=1.275in,head=15pt]{geometry}
 \usepackage{fancyhdr}
 \usepackage{pageslts}
 \usepackage{setspace}
 \usepackage{etoolbox}
-\usepackage[dvipsnames]{xcolor}
 \usepackage{amsmath,amsthm,amssymb,mathtools}
 
+\usepackage[dvipsnames]{xcolor}
+\usepackage{bm}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+
 \ifdraft\doublespacing\fi
+\ifdraft\showkeystrue\fi
+\ifshowkeysinline\PassOptionsToPackage{inline}{showlabels}\onehalfspacing\fi
+\ifshowkeys\else\PassOptionsToPackage{final}{showlabels}\fi
+\ifscreensize\geometry{margin=.75in,b5paper}\fi
+\ifebook\geometry{margin=.25in,a5paper}\fi
+\ifdarkmode
+  \pagecolor{darkgray}
+  \color{lightgray}
+  \definecolor{textfull}{gray}{1}
+\else
+  \definecolor{textfull}{gray}{0}
+\fi
+
+
 \AfterPreamble{\let\headtitle\@title}
-\ifdraft
+\ifdraft\headertrue\fi
+\ifheader
   \pagestyle{fancy}
   \lhead{\headtitle}
-  \rhead{\DTMnow{} \theCurrentPage/\lastpageref*{LastPages}}
+  % \rhead{\DTMnow{}\enspace(\theCurrentPage/\lastpageref*{LastPages})}
+  \rhead{\Today{}\enspace(\theCurrentPage/\lastpageref*{LastPages})}
   \fancypagestyle{plain}{}
   \fancypagestyle{empty}{}
-  \AtEveryBibitem{{\scriptsize\color{gray}\url{file:///Users/antonio/Dropbox/papers/\thefield{entrykey}.pdf}\par}}
 \else
   \renewcommand{\headrulewidth}{0pt}
 \fi
 
-\ifdraft\showkeystrue\fi
-\ifshowkeysinline\PassOptionsToPackage{inline}{showlabels}\onehalfspacing\fi
-\ifshowkeys\else\PassOptionsToPackage{final}{showlabels}\fi
-\ifebook\geometry{margin=.25in,a5paper}\fi
-
-\ifdarkmode\pagecolor{darkgray}\color{lightgray}\fi
+\ifdraft\fullcitestrue\fi
+\iffullcites
+  \AtEveryBibitem{{\scriptsize\color{gray}\url {file:///Users/antonio/Dropbox/papers/\thefield{entrykey}.pdf}\par}}
+\else
+  \AtEveryBibitem{\clearfield{url}}
+  \AtEveryBibitem{\clearfield{eprintclass}}
+\fi
+\ifsentencecase\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}\fi
 
 \usepackage{hyperref}
 \hypersetup{final}
 \usepackage[capitalize,noabbrev]{cleveref}
 \newcommand{\creflastconjunction}{, and~}
 \crefformat{footnote}{#2\footnotemark[#1]#3}
+\hypersetup{
+  colorlinks,
+  linkcolor={red!50!textfull},
+  citecolor={green!25!textfull},
+  urlcolor={blue!50!textfull},
+}
 
 \usepackage{tikz,tikz-cd}
 \usetikzlibrary{calc,quotes,matrix,automata,positioning}
@@ -76,17 +111,19 @@
   \@namedef{#1@cmt}##1{\cmt[#2]{##1}}
   \@namedef{#1@todo}##1##2{\todo[#2]{##2}}
   \@namedef{#1@ch}##1##2##3{\ch[#2]{##2}{##3}}
-  \@namedef{#1}{
-    \@ifnextchar!{\csname #1@ch\endcsname}{\@ifnextchar*{\csname #1@todo\endcsname}{\csname #1@cmt\endcsname}}
+  \@namedef{#1}{%
+    \@ifnextchar/{\csname #1@ch\endcsname}{\@ifnextchar!{\csname #1@todo\endcsname}{\csname #1@cmt\endcsname}}%
   }
 }
-\newcommand{\editor}[4][]{\ifthenelse{\equal{#1}{}}{\editor@helper{#2}{#2}{#3}{#4}}{\editor@helper{#1}{#2}{#3}{#4}}}
-\editor[am]{AM}{Antonio}{Mulberry}
+\NewDocumentCommand{\editor}{O{#2}mmm}{\editor@helper{#1}{#2}{#3}{#4}}
+\editor[a]{AM}{Antonio}{Mulberry}
 
 \usepackage{showlabels}
-\showlabels{autocite}
-\showlabels{cite}
-\showlabels{textcite}
+\showlabels{autocite} % cite
+\showlabels{cite} % cite as object, singular
+\showlabels{Cite}
+\showlabels{textcite} % in-text subject, plural.
+\showlabels{Textcite}
 \showlabels{cref}
 \showlabels{Cref}
 
@@ -96,7 +133,7 @@
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 
-\allowdisplaybreaks
+\allowdisplaybreaks{}
 
 \newcommand{\aliasenv}[2]{\newenvironment{#1}{\begin{#2}}{\end{#2}}}
 \newcommand{\undefthm}[1]{
@@ -105,50 +142,52 @@
 }
 
 \theoremstyle{plain}
-\newtheorem{thm}{Theorem}%[section]
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{lem}[thm]{Lemma}
-  \crefname{lem}{Lemma}{Lemmas}
-\newtheorem{conj}[thm]{Conjecture}
-\newtheorem{fact}[thm]{Fact}
-\newtheorem{claim}[thm]{Claim}
+\ifsectionthms
+\newtheorem{theorem}{Theorem}[section]
+\else
+\newtheorem{theorem}{Theorem}
+\fi
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+  \crefname{lemma}{Lemma}{Lemmas}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
 
 \theoremstyle{definition}
-\newtheorem{defn}[thm]{Definition}
+\newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{remark}
-\newtheorem{rmk}[thm]{Remark}
+\newtheorem{remark}[theorem]{Remark}
 
-\aliasenv{pf}{proof}
-
-\renewcommand*{\env@matrix}[1][*\c@MaxMatrixCols c]{
-  \hskip-\arraycolsep
-  \let\@ifnextchar\new@ifnextchar
-  \array{#1}
+\renewcommand*{\env@matrix}[1][*\c@MaxMatrixCols c]{%
+  \hskip-\arraycolsep%
+  \let\@ifnextchar\new@ifnextchar%
+  \array{#1}%
 }
 
-\newcommand{\tighten}{
-  \setlength{\itemsep}{2pt}
-  \setlength{\parskip}{1pt}
-  \setlength{\partopsep}{1pt}
+\newcommand{\tighten}{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\parskip}{1pt}%
+  \setlength{\partopsep}{1pt}%
 }
 
 \newcommand{\lef}{\left}
 \newcommand{\rig}{\right}
-\newcommand{\N}{\mathbf{N}}
-\newcommand{\Z}{\mathbf{Z}}
-\newcommand{\Q}{\mathbf{Q}}
-\newcommand{\R}{\mathbf{R}}
-\newcommand{\C}{\mathbf{C}}
-\newcommand{\F}{\mathbf{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
 \newcommand{\mc}{\mathcal}
 \newcommand{\mf}{\mathfrak}
-\newcommand{\mbf}{\mathbf}
+\newcommand{\mb}{\mathbf}
 \newcommand{\lat}{\mathrm}
 \newcommand{\ssf}{\mathsf}
 \newcommand{\bb}{\mathbb}
-\renewcommand{\sc}{\textsc}
+\newcommand{\tsc}{\textsc}
 \newcommand{\lin}{\mathsf L}
 \newcommand{\dd}{\mathop{}\!d}
 \newcommand{\eps}{\epsilon}
@@ -164,29 +203,19 @@
 \newcommand{\tr}{^{\mathsf{T}}}
 \newcommand{\bp}{\begin{pmatrix}}
 \newcommand{\ep}{\end{pmatrix}}
-\newcommand{\yields}{\vdash}
 \newcommand{\fa}{\forall}
 \newcommand{\te}{\exists}
-\renewcommand{\a}{\alpha}
-\newcommand{\G}{\Gamma}
-\newcommand{\m}{\models}
-\newcommand{\y}{\yields}
-\newcommand{\s}{\sigma}
-\renewcommand{\S}{\Sigma}
-\newcommand{\g}{\gamma}
-\renewcommand{\b}{\beta}
 \newcommand{\mt}{\emptyset}
-\newcommand{\p}{\partial}
-\newcommand{\we}{\wedge}
-\renewcommand{\t}{\tilde}
+\newcommand{\pa}{\mathop{}\!\partial}
+\NewDocumentCommand{\gr}{e{_^}}{\mathop{}\!\nabla\IfValueT{#1}{_{\!#1}}\IfValueT{#2}{^{#2}}}
+\newcommand{\til}{\tilde}
 \newcommand{\wh}{\widehat}
 \newcommand{\vphi}{\varphi}
 \newcommand{\vrho}{\varrho}
 \newcommand{\veps}{\varepsilon}
-\renewcommand{\it}{\intertext}
-\newcommand{\sit}{\shortintertext}
-\renewcommand{\t}{\text}
-\renewcommand{\l}{\ell}
+\newcommand{\itx}{\intertext}
+\newcommand{\sitx}{\shortintertext}
+\newcommand{\tx}{\text}
 \newcommand{\acts}{\lefttorightarrow}
 \newcommand{\incl}{\hookrightarrow}
 \newcommand{\hra}{\hookrightarrow}
@@ -203,32 +232,28 @@
 \newcommand{\mcl}{\mathclap}
 \newcommand{\sst}{\substack}
 \newcommand{\SST}[1]{\mcl{\sst{#1}}}
-\newcommand{\tri}{\triangle}
 \newcommand{\ones}{\mathbf1}
 \newcommand{\lims}{\limits}
 \newcommand{\nlims}{\nolimits}
 \newcommand{\co}{\colon}
-\newcommand{\na}{\nabla}
-\newcommand{\gr}{\nabla}
 
 \DeclarePairedDelimiter{\fl}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\cl}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\nrm}{\lVert}{\rVert}
 \DeclarePairedDelimiter{\ang}{\langle}{\rangle}
-\DeclarePairedDelimiter{\pa}{(}{)}
-\DeclarePairedDelimiter{\sq}{[}{]}
-\DeclarePairedDelimiter{\cu}{\{}{\}}
-\DeclarePairedDelimiter{\clop}{[}{)}
-\DeclarePairedDelimiter{\opcl}{(}{]}
+\DeclarePairedDelimiter{\p}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\s}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\cu}{\lbrace}{\rbrace}
+\DeclarePairedDelimiter{\clop}{\lbrack}{\rparen}
+\DeclarePairedDelimiter{\opcl}{\lparen}{\rbrack}
 
 \DeclareMathOperator*{\amin}{arg\,min}
 \DeclareMathOperator*{\amax}{arg\,max}
 \DeclareMathOperator*{\Var}{Var}
 \DeclareMathOperator*{\Cov}{Cov}
-\DeclareMathOperator*{\E}{\mathbf E}
+\DeclareMathOperator*{\E}{\mathbb E}
+\undef{\Pr}\DeclareMathOperator*{\Pr}{\mathbb P}
 \DeclareMathOperator{\diag}{diag}
-\undef{\Pr}\DeclareMathOperator*{\Pr}{\mathbf P}
-\undef{\H}\DeclareMathOperator{\H}{\mathbf H}
 
 \author{Antonio J. Molina Lovett}
