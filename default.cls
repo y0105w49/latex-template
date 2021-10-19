@@ -4,6 +4,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{default}[2019/10/16 y0105w49 default]
 
+\newif\ifbeamer\DeclareOption{presentation}{\beamertrue}
 \newif\ifshowkeys\DeclareOption{showkeys}{\showkeystrue}
 \newif\ifshowkeysinline\DeclareOption{showkeys=inline}{\showkeystrue\showkeysinlinetrue}
 \newif\ifdraft\DeclareOption{draft}{\drafttrue}
@@ -16,9 +17,10 @@
 \newif\ifsentencecase\DeclareOption{sentencecase}{\sentencecasetrue}
 \newif\ifsectionthms\DeclareOption{sectionthms}{\sectionthmstrue}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\newcommand{\theclass}{\ifbeamer beamer\else article\fi}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{\theclass}}
 \ProcessOptions\relax
-\LoadClass{article}
+\LoadClass{\theclass}
 
 
 \usepackage[T1]{fontenc}
@@ -29,21 +31,24 @@
 \usepackage{csquotes}
 \usepackage[style=alphabetic,alldates=year]{biblatex}
 \usepackage{datetime2}
-\usepackage[margin=1in,head=15pt]{geometry}
+\unless\ifbeamer\usepackage[margin=1in,head=15pt]{geometry}\fi
 \usepackage{fancyhdr}
 \usepackage{pageslts}
+\AtBeginDocument{\pagenumbering{arabic}}
 \usepackage{setspace}
 \usepackage{etoolbox}
 \usepackage{amsmath,amsthm,amssymb,mathtools}
 
+\unless\ifbeamer
 \usepackage[dvipsnames]{xcolor}
 \usepackage{bm}
 \usepackage{libertine,libertinust1math}
+\fi
 
 \ifdraft\doublespacing\fi
 \ifdraft\showkeystrue\fi
 \ifshowkeysinline\PassOptionsToPackage{inline}{showlabels}\onehalfspacing\fi
-\ifshowkeys\else\PassOptionsToPackage{final}{showlabels}\fi
+\unless\ifshowkeys\PassOptionsToPackage{final}{showlabels}\fi
 \ifcropped\geometry{margin=.22in,bottom=.5in}\fi
 \ifpcropped\geometry{margin=.6in,bottom=.5in}\fi
 \ifdarkmode
@@ -75,6 +80,8 @@
 \else
   \AtEveryBibitem{\clearfield{url}}
   \AtEveryBibitem{\clearfield{eprintclass}}
+  \AtEveryCitekey{\clearfield{url}}
+  \AtEveryCitekey{\clearfield{eprintclass}}
 \fi
 \ifsentencecase\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}\fi
 
@@ -86,7 +93,7 @@
 \hypersetup{
   colorlinks,
   linkcolor={red!50!textfull},
-  citecolor={green!25!textfull},
+  citecolor={green!35!textfull},
   urlcolor={blue!50!textfull},
 }
 
@@ -100,9 +107,10 @@
 \usepackage[inline]{enumitem}
 \usepackage{fancybox}
 \usepackage{multicol}
-\usepackage[commentmarkup=uwave,deletedmarkup=xout]{changes}
+\usepackage[defaultcolor=blue!70!textfull,commentmarkup=uwave,deletedmarkup=xout]{changes}
+\setcommentmarkup{\IfIsColored{\color{authorcolor}}{}[#3\arabic{authorcommentcount}] #1}
 
-\newcommand{\todo}[2][]{\iffinal\PackageWarning{todos}{[#1] #2}\fi\comment[id=#1]{TODO #2}}
+\newcommand{\todo}[2][]{\iffinal\PackageWarning{todos}{[#1] #2}\fi\comment[id=#1]{TODO: #2}}
 \newcommand{\td}[1][!]{\todo{#1}}
 \newcommand{\cmt}[2][]{\comment[id=#1]{#2}}
 \newcommand{\ch}[3][]{\replaced[id=#1]{#2}{#3}}
@@ -141,6 +149,7 @@
   \expandafter\let\csname c@#1\endcsname\relax
 }
 
+\unless\ifbeamer
 \theoremstyle{plain}
 \ifsectionthms
 \newtheorem{theorem}{Theorem}[section]
@@ -160,6 +169,7 @@
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+\fi
 
 \renewcommand*{\env@matrix}[1][*\c@MaxMatrixCols c]{%
   \hskip-\arraycolsep%

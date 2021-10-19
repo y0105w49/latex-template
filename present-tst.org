@@ -3,16 +3,30 @@
 #+AUTHOR: Test Author
 #+DATE: 2018-01-01
 
+#+STARTUP: beamer
 #+OPTIONS: timestamp:nil
 #+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+# #+OPTIONS: H:3
+# #+REVEAL_HLEVEL: 2
 #+OPTIONS: reveal_single_file:nil
+# #+LATEX_CLASS: present
 #+BEAMER_HEADER: \PassOptionsToPackage{style=authoryear}{biblatex}
 #+BEAMER_HEADER: \NewDocumentEnvironment{notes}{+b}{\note{#1}}{}
-# #+BEAMER_HEADER: \setbeameroption{show notes}
-#+BEAMER_HEADER: \setbeameroption{show notes on second screen=right}
+#+BEAMER_HEADER: \setbeameroption{show notes}
+# #+BEAMER_HEADER: \setbeameroption{hide notes}
+# #+BEAMER_HEADER: \setbeameroption{show only notes}
+# #+BEAMER_HEADER: \setbeameroption{show notes on second screen=right}
+#+BEAMER_HEADER: \makeatletter
+#+BEAMER_HEADER: \def\beamer@framenotesbegin{%
+#+BEAMER_HEADER:  \gdef\beamer@noteitems{}%
+#+BEAMER_HEADER:  \gdef\beamer@notes{{}}%
+#+BEAMER_HEADER: }
+#+BEAMER_HEADER: \makeatother
 # #+REVEAL_PLUGINS: (highlight)
+# #+REVEAL_TRANS: convex
 # #+REVEAL_THEME: white
-#+REVEAL_THEME: black
+# #+REVEAL_THEME: black
 # #+REVEAL_THEME: serif
 
 # https://blog.tecosaur.com/tmio/
