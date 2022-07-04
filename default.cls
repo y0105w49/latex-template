@@ -19,6 +19,7 @@
 
 \newcommand{\theclass}{\ifbeamer beamer\else article\fi}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\theclass}}
+\PassOptionsToClass{usenames,dvipsnames}{beamer}
 \ProcessOptions\relax
 \LoadClass{\theclass}
 
@@ -27,6 +28,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[canadian]{babel}
 \usepackage{newunicodechar}
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage{microtype}
 \usepackage{fmtcount}
 \usepackage{csquotes}
 \usepackage[style=alphabetic,alldates=year]{biblatex}
@@ -38,12 +42,17 @@
 \usepackage{setspace}
 \usepackage{etoolbox}
 \usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{booktabs}
 
-\unless\ifbeamer
+\ifbeamer
+\usetheme[progressbar=foot]{metropolis}
+\usepackage[sfdefault]{FiraSans}
+% \usepackage{libertine}
+\else
 \usepackage[dvipsnames]{xcolor}
-\usepackage{bm}
 \usepackage{libertine,libertinust1math}
 \fi
+\usepackage{bm}
 
 \ifdraft\doublespacing\fi
 \ifdraft\showkeystrue\fi
@@ -86,13 +95,14 @@
 \ifsentencecase\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}\fi
 
 \usepackage{hyperref}
+\usepackage[nodocdata=true,nopdftrailerid=true]{pdfprivacy}
 \hypersetup{final}
 \usepackage[capitalize,noabbrev]{cleveref}
 \newcommand{\creflastconjunction}{, and~}
 \crefformat{footnote}{#2\footnotemark[#1]#3}
 \hypersetup{
   colorlinks,
-  linkcolor={red!50!textfull},
+  linkcolor={\unless\ifbeamer red!50!textfull\fi},
   citecolor={green!35!textfull},
   urlcolor={blue!50!textfull},
 }
@@ -100,11 +110,14 @@
 \usepackage{tikz,tikz-cd}
 \usetikzlibrary{calc,quotes,matrix,automata,positioning}
 
+\usepackage{upquote}
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}
+
 \usepackage{thm-restate}
 % \usepackage[normalem]{ulem}
 \usepackage{braket}
 \usepackage[ampersand]{easylist}
-\usepackage[inline]{enumitem}
+\unless\ifbeamer\usepackage[inline]{enumitem}\fi
 \usepackage{fancybox}
 \usepackage{multicol}
 \usepackage[defaultcolor=blue!70!textfull,commentmarkup=uwave,deletedmarkup=xout]{changes}
@@ -159,7 +172,6 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
-  \crefname{lemma}{Lemma}{Lemmas}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{claim}[theorem]{Claim}
@@ -200,6 +212,7 @@
 \DeclareMathOperator*{\Cov}{Cov}
 \DeclareMathOperator*{\E}{\mathbb E}
 \undef{\Pr}\DeclareMathOperator*{\Pr}{\mathbb P}
+\DeclareMathOperator{\poly}{poly}
 \DeclareMathOperator{\diag}{diag}
 
 \newcommand{\lef}{\left}
